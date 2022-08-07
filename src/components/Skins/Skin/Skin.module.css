@@ -1,0 +1,37 @@
+.Skin {
+  padding: 20rem;
+  border-bottom: 1px #f2f2f2 solid;
+}
+
+.ImgBox {
+  flex-shrink: 0;
+  width: 240rem;
+  margin-right: 10px;
+}
+
+img {
+  vertical-align: middle;
+  width: 100%;
+}
+
+.Title {
+  font-weight: normal;
+}
+
+.Desc {
+  color: #bbb;
+}
+
+.PriceWrapper {
+  margin-top: 14px;
+}
+
+.Price {
+  font-weight: bold;
+  font-style: 18px;
+}
+
+.Price::before {
+  content: "¥";
+  font-size: 14px;
+}

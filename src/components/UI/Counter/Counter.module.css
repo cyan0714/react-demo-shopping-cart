@@ -1,0 +1,17 @@
+.Sub,
+.Add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40rem;
+  height: 40rem;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 50%;
+  background-color: #333;
+}
+
+.Amount {
+  font-size: 16px;
+  margin: 0 6px;
+}
