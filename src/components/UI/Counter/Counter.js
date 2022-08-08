@@ -5,12 +5,12 @@ import classes from './Counter.module.css'
 export default ({ amount }) => {
   return (
     <div className={['flex-y-center']}>
-      {amount !== 0 ? (
+      {amount ? (
         <>
           <div className={[classes.Sub]}>
             <FontAwesomeIcon icon={faMinus} />
           </div>
-          <span className={[classes.Amount]}>2</span>
+          <span className={[classes.Amount]}>{amount}</span>
         </>
       ) : (
         ''
