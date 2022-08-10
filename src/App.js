@@ -1,4 +1,6 @@
-import Skins from "./components/Skins/Skins"
+import React, { useState } from 'react'
+import Skins from './components/Skins/Skins'
+import CartContext from './store/cart.context'
 
 const skinsData = [
   {
@@ -70,15 +72,53 @@ const skinsData = [
     desc: '典藏皮肤，已经永久下架，抽奖活动中可以抽到。',
     price: 9999,
     img: '/imgs/skins/Veigar.jpg'
-  },
+  }
 ]
 
 function App() {
+  const [cartData, setCartData] = useState({
+    items: [],
+    totalAmount: 0,
+    totalPrice: 0
+  })
+
+  const addItem = skin => {
+    const newCart = { ...cartData }
+
+    if (newCart.items.indexOf(skin) === -1) {
+      newCart.items.push(skin)
+      skin.amount = 1
+    } else {
+      skin.amount += 1
+    }
+
+    newCart.totalAmount += 1
+    newCart.totalPrice += skin.price
+
+    setCartData(newCart)
+  }
+
+  const removeItem = skin => {
+    const newCart = { ...cartData }
+
+    skin.amount -= 1
+
+    if (skin.amount === 0) {
+      newCart.items.splice(newCart.items.indexOf(skin), 1)
+    }
+
+    newCart.totalAmount -= 1
+    newCart.totalPrice -= skin.price
+
+    setCartData(newCart)
+  }
   return (
-    <div className="App">
-      <Skins skinsData={ skinsData } />
-    </div>
-  );
+    <CartContext.Provider value={{ ...cartData, addItem, removeItem }}>
+      <div className='App'>
+        <Skins skinsData={skinsData} />
+      </div>
+    </CartContext.Provider>
+  )
 }
 
-export default App;
+export default App

@@ -12,7 +12,7 @@ export default ({ skin }) => {
         <p className={`${classes.Desc} double-row-ellip`}>{skin.desc}</p>
         <div className={`${classes.PriceWrapper} flex-between`}>
           <span className={`${classes.Price} font-md`}>{skin.price}</span>
-          <Counter amount={skin.amount} />
+          <Counter skin={skin} />
         </div>
       </div>
     </div>
