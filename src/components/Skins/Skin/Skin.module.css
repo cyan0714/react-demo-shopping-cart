@@ -20,11 +20,12 @@ img {
 
 .Desc {
   margin-top: 6px;
+  margin-bottom: 6px;
   color: #bbb;
 }
 
 .PriceWrapper {
-  margin-top: 14px;
+  margin-top: 6px;
 }
 
 .Price {

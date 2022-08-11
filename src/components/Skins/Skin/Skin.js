@@ -8,7 +8,7 @@ export default ({ skin }) => {
         <img src={skin.img} />
       </div>
       <div>
-        <h2>{skin.title}</h2>
+        <span>{skin.title}</span>
         <p className={`${classes.Desc} double-row-ellip`}>{skin.desc}</p>
         <div className={`${classes.PriceWrapper} flex-between`}>
           <span className={`${classes.Price} font-md`}>{skin.price}</span>

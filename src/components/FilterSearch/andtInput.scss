@@ -1,0 +1,8 @@
+.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled) {
+  border-radius: 40px;
+  background-color: #f5f5f5;
+
+  > input.ant-input {
+    background-color: #f5f5f5 !important;
+  }
+}

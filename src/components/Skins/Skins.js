@@ -1,8 +1,9 @@
 import Skin from './Skin/Skin'
+import classes from './Skins.module.css'
 
 export default ({ skinsData }) => {
   return (
-    <div style={{ height: '100vh', overflow: 'auto' }}>
+    <div className={classes.Skins}>
       {skinsData.map(skin => {
         return <Skin key={skin.id} skin={skin} />
       })}

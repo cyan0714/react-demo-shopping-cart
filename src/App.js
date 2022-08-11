@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
+import 'antd/dist/antd.css';
+
 import Skins from './components/Skins/Skins'
+import FilterSearch from './components/FilterSearch/FilterSearch'
 import CartContext from './store/cart.context'
+
 
 const skinsData = [
   {
@@ -72,10 +76,19 @@ const skinsData = [
     desc: '典藏皮肤，已经永久下架，抽奖活动中可以抽到。',
     price: 9999,
     img: '/imgs/skins/Veigar.jpg'
-  }
+  },
+  {
+    id: '11',
+    title: '卧虎藏龙 贾克斯',
+    desc: '算是比较稀有的一款限定皮肤，但是在抽奖活动中可以获得。',
+    price: 89,
+    img: '/imgs/skins/Jax2.jpg'
+  },
 ]
 
 function App() {
+  const [filteredSkins, setFilteredSkins] = useState(skinsData)
+
   const [cartData, setCartData] = useState({
     items: [],
     totalAmount: 0,
@@ -94,13 +107,11 @@ function App() {
 
     newCart.totalAmount += 1
     newCart.totalPrice += skin.price
-
     setCartData(newCart)
   }
 
   const removeItem = skin => {
     const newCart = { ...cartData }
-
     skin.amount -= 1
 
     if (skin.amount === 0) {
@@ -109,13 +120,19 @@ function App() {
 
     newCart.totalAmount -= 1
     newCart.totalPrice -= skin.price
-
     setCartData(newCart)
   }
+
+  const filterSkinsHandler = (e) => {
+    const newFilteredSkins = skinsData.filter(skin => skin.title.includes(e.target.value))
+    setFilteredSkins(newFilteredSkins)
+  }
+
   return (
     <CartContext.Provider value={{ ...cartData, addItem, removeItem }}>
       <div className='App'>
-        <Skins skinsData={skinsData} />
+        <FilterSearch onSearch={filterSkinsHandler} />
+        <Skins skinsData={filteredSkins} />
       </div>
     </CartContext.Provider>
   )
