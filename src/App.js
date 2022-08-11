@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import 'antd/dist/antd.css';
 
 import Skins from './components/Skins/Skins'
-import FilterSearch from './components/FilterSearch/FilterSearch'
+import FilterSkins from './components/FilterSkins/FilterSkins'
 import CartContext from './store/cart.context'
 
 
@@ -131,7 +131,7 @@ function App() {
   return (
     <CartContext.Provider value={{ ...cartData, addItem, removeItem }}>
       <div className='App'>
-        <FilterSearch onSearch={filterSkinsHandler} />
+        <FilterSkins onSearch={filterSkinsHandler} />
         <Skins skinsData={filteredSkins} />
       </div>
     </CartContext.Provider>

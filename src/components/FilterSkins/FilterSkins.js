@@ -3,12 +3,11 @@ import { Input } from 'antd'
 import React from 'react'
 
 import './andtInput.scss'
-import classes from './FilterSearch.module.css'
+import classes from './FilterSkins.module.css'
 
-const FilterSearch = ({onSearch}) => (
-  <div className={classes.FilterSearch}>
+const FilterSkins = ({onSearch}) => (
+  <div className={classes.FilterSkins}>
     <Input
-      className={classes.FSInput}
       onChange={onSearch}
       size='large'
       placeholder='请输入关键字'
@@ -17,4 +16,4 @@ const FilterSearch = ({onSearch}) => (
   </div>
 )
 
-export default FilterSearch
+export default FilterSkins
