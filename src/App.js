@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import 'antd/dist/antd.css';
 
 import Skins from './components/Skins/Skins'
+import Cart from "./components/Cart/Cart";
 import FilterSkins from './components/FilterSkins/FilterSkins'
 import CartContext from './store/cart.context'
+
 
 
 const skinsData = [
@@ -133,6 +135,7 @@ function App() {
       <div className='App'>
         <FilterSkins onSearch={filterSkinsHandler} />
         <Skins skinsData={filteredSkins} />
+        <Cart />
       </div>
     </CartContext.Provider>
   )
