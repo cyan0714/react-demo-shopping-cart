@@ -17,10 +17,10 @@ export default ({ skin }) => {
   }
 
   return (
-    <div className={['flex-y-center']}>
+    <div className={[`flex-y-center Counter`]}>
       {skin.amount ? (
         <>
-          <div className={[classes.Sub]} onClick={subButtonHandler}>
+          <div className={[`${classes.Sub} AddBtn`]} onClick={subButtonHandler}>
             <FontAwesomeIcon icon={faMinus} />
           </div>
           <span className={[classes.Amount]}>{skin.amount}</span>
@@ -28,7 +28,7 @@ export default ({ skin }) => {
       ) : (
         ''
       )}
-      <div className={[classes.Add]} onClick={addButtonHandler}>
+      <div className={[`${classes.Add} SubBtn`]} onClick={addButtonHandler}>
         <FontAwesomeIcon icon={faPlus} />
       </div>
     </div>

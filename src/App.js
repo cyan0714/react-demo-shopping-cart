@@ -125,13 +125,23 @@ function App() {
     setCartData(newCart)
   }
 
+  const clearCart = () => {
+    const newCart = { ...cartData };
+    newCart.items.forEach(item => delete item.amount);
+    newCart.items = [];
+    newCart.totalAmount = 0;
+    newCart.totalPrice = 0;
+
+    setCartData(newCart);
+};
+
   const filterSkinsHandler = (e) => {
     const newFilteredSkins = skinsData.filter(skin => skin.title.includes(e.target.value))
     setFilteredSkins(newFilteredSkins)
   }
 
   return (
-    <CartContext.Provider value={{ ...cartData, addItem, removeItem }}>
+    <CartContext.Provider value={{ ...cartData, addItem, removeItem, clearCart }}>
       <div className='App'>
         <FilterSkins onSearch={filterSkinsHandler} />
         <Skins skinsData={filteredSkins} />
