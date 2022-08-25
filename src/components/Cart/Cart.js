@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import classes from './Cart.module.css'
 import iconImg from '../../asset/bag.png'
 import CartContext from '../../store/cart.context'
@@ -10,6 +10,13 @@ const Cart = () => {
 
   const [isShowCartDetail, setIsShowCartDetail] = useState(false)
   const [showCheckout, setShowCheckout] = useState(false)
+
+  useEffect(() => {
+    if (ctx.totalAmount === 0) {
+      setIsShowCartDetail(false)
+      setShowCheckout(false)
+    }
+  })
 
   const toggleCartDetail = () => {
     if (ctx.totalAmount === 0) {
