@@ -16,7 +16,7 @@ const Cart = () => {
       setIsShowCartDetail(false)
       setShowCheckout(false)
     }
-  })
+  },[ctx])
 
   const toggleCartDetail = () => {
     if (ctx.totalAmount === 0) {

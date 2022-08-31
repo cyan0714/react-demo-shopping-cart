@@ -135,8 +135,8 @@ function App() {
     setCartData(newCart);
 };
 
-  const filterSkinsHandler = (e) => {
-    const newFilteredSkins = skinsData.filter(skin => skin.title.includes(e.target.value))
+  const filterSkinsHandler = (value) => {
+    const newFilteredSkins = skinsData.filter(skin => skin.title.includes(value))
     setFilteredSkins(newFilteredSkins)
   }
 
