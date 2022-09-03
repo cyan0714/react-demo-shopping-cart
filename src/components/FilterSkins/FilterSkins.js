@@ -11,7 +11,13 @@ const FilterSkins = ({ onSearch }) => {
     setKeyword(e.target.value.trim());
   }
   useEffect(() => {
-    onSearch(keyword)
+    const timer = setTimeout(() => {
+      onSearch(keyword)
+    }, 1000)
+
+    return () => {
+      clearTimeout(timer)
+    }
   }, [keyword])
   return (
     <div className={classes.FilterSkins}>
