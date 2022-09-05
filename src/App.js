@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
-import 'antd/dist/antd.css';
+import React, { useState, useReducer } from 'react'
+import 'antd/dist/antd.css'
 
 import Skins from './components/Skins/Skins'
-import Cart from "./components/Cart/Cart";
+import Cart from './components/Cart/Cart'
 import FilterSkins from './components/FilterSkins/FilterSkins'
 import CartContext from './store/cart.context'
-
-
 
 const skinsData = [
   {
@@ -85,63 +83,65 @@ const skinsData = [
     desc: '算是比较稀有的一款限定皮肤，但是在抽奖活动中可以获得。',
     price: 89,
     img: '/imgs/skins/Jax2.jpg'
-  },
+  }
 ]
+
+const cartReducer = (state, action) => {
+  const newCart = { ...state }
+  switch (action.type) {
+    case 'ADDSKIN':
+      if (newCart.items.indexOf(action.skin) === -1) {
+        newCart.items.push(action.skin)
+        action.skin.amount = 1
+      } else {
+        action.skin.amount += 1
+      }
+
+      newCart.totalAmount += 1
+      newCart.totalPrice += action.skin.price
+      return newCart
+
+    case 'REMOVESKIN':
+      action.skin.amount -= 1
+
+      if (action.amount === 0) {
+        newCart.items.splice(newCart.items.indexOf(action.skin), 1)
+      }
+
+      newCart.totalAmount -= 1
+      newCart.totalPrice -= action.skin.price
+      return newCart
+
+    case 'CLEAR':
+      newCart.items.forEach(item => delete item.amount)
+      newCart.items = []
+      newCart.totalAmount = 0
+      newCart.totalPrice = 0
+      return newCart
+
+    default:
+      return newCart
+  }
+}
 
 function App() {
   const [filteredSkins, setFilteredSkins] = useState(skinsData)
 
-  const [cartData, setCartData] = useState({
+  const [cartData, cartDispatch] = useReducer(cartReducer, {
     items: [],
     totalAmount: 0,
     totalPrice: 0
   })
 
-  const addItem = skin => {
-    const newCart = { ...cartData }
-
-    if (newCart.items.indexOf(skin) === -1) {
-      newCart.items.push(skin)
-      skin.amount = 1
-    } else {
-      skin.amount += 1
-    }
-
-    newCart.totalAmount += 1
-    newCart.totalPrice += skin.price
-    setCartData(newCart)
-  }
-
-  const removeItem = skin => {
-    const newCart = { ...cartData }
-    skin.amount -= 1
-
-    if (skin.amount === 0) {
-      newCart.items.splice(newCart.items.indexOf(skin), 1)
-    }
-
-    newCart.totalAmount -= 1
-    newCart.totalPrice -= skin.price
-    setCartData(newCart)
-  }
-
-  const clearCart = () => {
-    const newCart = { ...cartData };
-    newCart.items.forEach(item => delete item.amount);
-    newCart.items = [];
-    newCart.totalAmount = 0;
-    newCart.totalPrice = 0;
-
-    setCartData(newCart);
-};
-
-  const filterSkinsHandler = (value) => {
-    const newFilteredSkins = skinsData.filter(skin => skin.title.includes(value))
+  const filterSkinsHandler = value => {
+    const newFilteredSkins = skinsData.filter(skin =>
+      skin.title.includes(value)
+    )
     setFilteredSkins(newFilteredSkins)
   }
 
   return (
-    <CartContext.Provider value={{ ...cartData, addItem, removeItem, clearCart }}>
+    <CartContext.Provider value={{ ...cartData, cartDispatch }}>
       <div className='App'>
         <FilterSkins onSearch={filterSkinsHandler} />
         <Skins skinsData={filteredSkins} />

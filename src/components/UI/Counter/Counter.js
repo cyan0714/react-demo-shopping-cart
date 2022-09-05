@@ -9,11 +9,11 @@ export default ({ skin }) => {
   const ctx = useContext(CartContext)
 
   const addButtonHandler = () => {
-    ctx.addItem(skin)
+    ctx.cartDispatch({type: "ADDSKIN", skin})
   }
 
   const subButtonHandler = () => {
-    ctx.removeItem(skin)
+    ctx.cartDispatch({type: "REMOVESKIN", skin})
   }
 
   return (
